@@ -1,17 +1,16 @@
 const jsonServer = require("json-server");
-const server = jsonServer.create();
-const router = jsonServer.router("./cities.json");
-const middlewares = jsonServer.defaults({
-  static: "./dist",
+const app = jsonServer.create();
+const path = require("path");
+const express = require("express");
+const middlewares = jsonServer.defaults();
+const router = jsonServer.router("db.json");
+const port = 8000;
+
+app.use("/cities", middlewares, router);
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
-const PORT = 8000;
-server.use(middlewares);
-server.use(
-  jsonServer.rewriter({
-    "/api/*": "/$1",
-  })
-);
-server.use(router);
-server.listen(PORT, () => {
-  console.log("Server is running");
-});
+
+server.listen(port);
