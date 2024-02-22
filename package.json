@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "serve-server": "vite server",
-    "build": "vite build && npm run serve-server",
+    "build": "vite build && npm run server",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server --watch data/cities.json --port 8000 --delay 500"
